@@ -13,9 +13,13 @@
   </head>
   <body>
     <div class="loading-screen" aria-hidden="true">
-      <div class="loading-mark">CONSTALAB</div>
-      <div class="loading-line"><span></span></div>
-      <p>Inicializando sistema estratégico...</p>
+      <div class="loading-content">
+        <div class="loading-mark">
+          <img src="assets/CONSTA LOGO (1).png" alt="CONSTALAB" />
+        </div>
+        <div class="loading-line"><span></span></div>
+        <p>Inicializando sistema estratégico...</p>
+      </div>
     </div>
 
     <div class="cursor-dot" aria-hidden="true"></div>
@@ -32,7 +36,7 @@
 
     <header class="site-header" id="top">
       <nav class="container nav-wrap">
-        <a href="#top" class="brand magnetic" aria-label="CONSTALAB inicio">
+        <a href="#top" class="brand" aria-label="CONSTALAB inicio">
           <img src="assets/CONSTA LOGO (1).png" alt="CONSTALAB" class="brand-logo" />
         </a>
 
@@ -42,17 +46,47 @@
         </button>
 
         <div class="main-nav" id="main-nav">
-          <a href="#nosotros" data-nav>Nosotros</a>
+          <a href="#nosotros" data-nav>PILARES</a>
           <a href="#servicios" data-nav>Servicios</a>
           <a href="#proceso" data-nav>Proceso</a>
           <a href="#filosofia" data-nav>Filosofía</a>
           <a href="#casos" data-nav>Casos</a>
+          <a href="#equipo" data-nav>Equipo</a>
           <a href="#contacto" data-nav>Contacto</a>
           <span class="nav-rail" aria-hidden="true"></span>
           <a class="btn btn-small magnetic" href="#contacto">Agenda una llamada →</a>
         </div>
       </nav>
     </header>
+
+    <a
+      class="whatsapp-cta"
+      href="https://api.whatsapp.com/send?text=Hola%2C%20quiero%20más%20información%20sobre%20CONSTALAB"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Abrir WhatsApp para contactar a CONSTALAB"
+    >
+      <span class="whatsapp-cta__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" role="presentation" focusable="false" aria-hidden="true">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3a8.8 8.8 0 0 0-7.7 13l-.9 4 4.1-1.1A8.8 8.8 0 1 0 12 3z"
+          />
+          <path
+            fill="currentColor"
+            d="M9.3 8.5c.3-.5.8-.6 1.2-.4l1 .5c.4.2.5.6.4.9l-.4 1.1c-.1.3 0 .6.2.8l1.4 1.4c.2.2.5.3.8.2l1.1-.4c.4-.1.7 0 .9.4l.5 1c.2.4.1.9-.4 1.2-.7.4-1.7.5-2.7.2-1.3-.4-2.8-1.6-3.7-3.1-.9-1.6-1.1-3.2-.8-4.4z"
+          />
+        </svg>
+      </span>
+      <span class="whatsapp-cta__copy">
+        <strong>WhatsApp</strong>
+        <small>Escríbenos</small>
+      </span>
+    </a>
 
     <main>
       <section class="hero section" aria-label="Hero" data-chapter="00">
@@ -123,11 +157,11 @@
             <p class="tiny-title">Nuestros pilares</p>
             <ul class="pillar-list">
               <li class="pillar-card"><span class="pillar-num">01</span><strong>Estrategia</strong><span>Diagnóstico y planificación operativa</span></li>
-              <li class="pillar-card"><span class="pillar-num">02</span><strong>Identidad</strong><span>Branding y posicionamiento de marca</span></li>
+              <li class="pillar-card"><span class="pillar-num">02</span><strong>Identidad</strong><span>Branding y presencia digital</span></li>
               <li class="pillar-card"><span class="pillar-num">03</span><strong>Sistemas</strong><span>Arquitectura de procesos escalables</span></li>
               <li class="pillar-card"><span class="pillar-num">04</span><strong>Automatización</strong><span>Flujos de trabajo inteligentes</span></li>
-              <li class="pillar-card"><span class="pillar-num">05</span><strong>IA</strong><span>Tecnología aplicada al negocio</span></li>
-              <li class="pillar-card"><span class="pillar-num">06</span><strong>Operaciones</strong><span>Ejecución y mejora continua</span></li>
+              <li class="pillar-card"><span class="pillar-num">05</span><strong>IA</strong><span>Tecnologia aplicada a los procesos</span></li>
+              <li class="pillar-card"><span class="pillar-num">06</span><strong>Protección legal</strong><span>Registro y protección de marca</span></li>
             </ul>
           </aside>
         </div>
@@ -137,7 +171,7 @@
         <div class="container">
           <div class="section-head reveal">
             <div class="label"><span></span><p>Servicios / Soluciones</p></div>
-            <h2>Soluciones operativas <em>estratégicas</em></h2>
+            <h2>Soluciones <em>estratégicas</em></h2>
             <p>
               No ofrecemos servicios aislados. Diseñamos ecosistemas completos que transforman cómo opera tu negocio.
             </p>
@@ -307,83 +341,231 @@
       </section>
 
       <section id="casos" class="section section-dark cases" data-chapter="05">
-        <div class="container">
-          <div class="section-head reveal">
-            <div class="label"><span></span><p>Casos de Estudio</p></div>
-            <h2>Resultados que <em>transforman negocios</em></h2>
+        <div class="container cases-wrap">
+          <div class="section-head reveal case-head">
+            <div class="label"><span></span><p>Casos de Éxito</p></div>
+            <h2>Resultados con <em>impacto inmediato</em></h2>
             <p>
-              Cada proyecto es una oportunidad de demostrar que los sistemas bien diseñados generan resultados medibles y sostenibles.
+              Cada intervención se diseña para transformar operaciones complejas en sistemas claros,
+              medibles y escalables.
             </p>
           </div>
 
-          <div class="case-grid">
-            <article class="case-card reveal">
-              <header>
-                <p>Transformación Operativa</p>
-                <h3>De caos operativo a sistema escalable</h3>
-                <small>Empresa de servicios profesionales</small>
+          <div class="case-study-grid" aria-label="Casos de éxito destacados">
+            <article class="case-study-card case-study-card--crm reveal" data-case="crm" tabindex="0">
+              <div class="case-card-noise" aria-hidden="true"></div>
+              <p class="case-giant-num" aria-hidden="true">01</p>
+
+              <header class="case-summary">
+                <h3>Del caos operativo a un ecosistema automatizado</h3>
+                <p>CRM integral para ventas masivas y automatización comercial.</p>
               </header>
-              <div class="metrics">
-                <div><strong data-count="65">0</strong><span>%</span><p>Reducción de tiempo</p></div>
-                <div><strong data-count="12">0</strong><span></span><p>Procesos automatizados</p></div>
-                <div><strong data-count="3">0</strong><span>x</span><p>Crecimiento sostenido</p></div>
+
+              <div class="case-visual case-visual-crm" aria-hidden="true">
+                <div class="visual-orb"></div>
+                <div class="visual-panel panel-a"></div>
+                <div class="visual-panel panel-b"></div>
+                <div class="visual-chart"></div>
+                <div class="visual-ring"></div>
               </div>
-              <div class="case-chart" aria-hidden="true">
-                <svg class="sparkline" viewBox="0 0 220 56" preserveAspectRatio="none">
-                  <path class="track" d="M0 47 L34 44 L68 36 L102 31 L136 22 L170 16 L220 9" />
-                  <path class="line" d="M0 47 L34 44 L68 36 L102 31 L136 22 L170 16 L220 9" />
-                </svg>
+
+              <div class="case-metrics" aria-label="Métricas del proyecto CRM">
+                <div><strong>+280%</strong><span>Velocidad operativa</span></div>
+                <div><strong>5,000+</strong><span>Productos gestionados</span></div>
+                <div><strong>-70%</strong><span>Tiempo de gestión</span></div>
               </div>
-              <p>
-                Reestructuramos completamente las operaciones de una empresa de 50 empleados, implementando sistemas de gestión y automatizaciones.
-              </p>
-              <button type="button" class="magnetic">Ver caso completo ↗</button>
+
+              <div class="case-mini-tags" aria-label="Categorías del proyecto CRM">
+                <span>CRM</span>
+                <span>Automatización</span>
+                <span>Escalabilidad</span>
+              </div>
+
+              <p class="case-card-cta">Ver Caso de Éxito →</p>
             </article>
 
-            <article class="case-card reveal delay-1">
-              <header>
-                <p>Sistema de Marca</p>
-                <h3>Identidad que comunica valor</h3>
-                <small>Startup tecnológica B2B</small>
+            <article class="case-study-card case-study-card--institution reveal delay-1" data-case="institutional" tabindex="0">
+              <div class="case-card-noise" aria-hidden="true"></div>
+              <p class="case-giant-num" aria-hidden="true">02</p>
+
+              <header class="case-summary">
+                <h3>Complejidad institucional convertida en arquitectura digital</h3>
+                <p>Plataforma documental robusta para gestión a gran escala.</p>
               </header>
-              <div class="metrics">
-                <div><strong data-count="100">0</strong><span>%</span><p>Coherencia de marca</p></div>
-                <div><strong data-count="180" data-prefix="+">0</strong><span>%</span><p>Conversión web</p></div>
-                <div><strong data-count="40" data-prefix="-">0</strong><span>%</span><p>Menos tiempo al mercado</p></div>
+
+              <div class="case-visual case-visual-institution" aria-hidden="true">
+                <div class="visual-doc doc-a"></div>
+                <div class="visual-doc doc-b"></div>
+                <div class="visual-doc doc-c"></div>
+                <div class="visual-connector"></div>
+                <div class="visual-pulse"></div>
               </div>
-              <div class="case-chart" aria-hidden="true">
-                <svg class="sparkline" viewBox="0 0 220 56" preserveAspectRatio="none">
-                  <path class="track" d="M0 45 L34 40 L68 34 L102 30 L136 26 L170 19 L220 12" />
-                  <path class="line" d="M0 45 L34 40 L68 34 L102 30 L136 26 L170 19 L220 12" />
-                </svg>
+
+              <div class="case-metrics" aria-label="Métricas del proyecto institucional">
+                <div><strong>10,000+</strong><span>Documentos gestionados</span></div>
+                <div><strong>+350%</strong><span>Eficiencia operativa</span></div>
+                <div><strong>-85%</strong><span>Tiempo de búsqueda</span></div>
               </div>
-              <p>
-                Diseñamos un sistema de marca completo que incluye identidad visual, messaging estratégico y experiencia web coherente.
-              </p>
-              <button type="button" class="magnetic">Ver caso completo ↗</button>
+
+              <div class="case-mini-tags" aria-label="Categorías del proyecto institucional">
+                <span>Institucional</span>
+                <span>Documentación</span>
+                <span>Inteligencia operativa</span>
+              </div>
+
+              <p class="case-card-cta">Ver Caso de Éxito →</p>
             </article>
 
-            <article class="case-card reveal delay-2">
-              <header>
-                <p>Automatización con IA</p>
-                <h3>Flujos inteligentes que escalan</h3>
-                <small>E-commerce en crecimiento</small>
+            <article class="case-study-card case-study-card--branding reveal delay-2" data-case="branding" tabindex="0">
+              <div class="case-card-noise" aria-hidden="true"></div>
+              <p class="case-giant-num" aria-hidden="true">03</p>
+
+              <header class="case-summary">
+                <h3>Identidad estratégica diseñada para escalar percepción premium</h3>
+                <p>Branding, comunicación y web para posicionamiento internacional.</p>
               </header>
-              <div class="metrics">
-                <div><strong data-count="78">0</strong><span>%</span><p>Tickets resueltos</p></div>
-                <div><strong data-count="94">0</strong><span>%</span><p>Satisfacción cliente</p></div>
-                <div><strong data-count="15" data-prefix="$">0</strong><span>k</span><p>Ahorro mensual</p></div>
+
+              <div class="case-visual case-visual-branding" aria-hidden="true">
+                <div class="visual-mockup mock-a"></div>
+                <div class="visual-mockup mock-b"></div>
+                <div class="visual-chip"></div>
+                <div class="visual-badge"></div>
               </div>
-              <div class="case-chart" aria-hidden="true">
-                <svg class="sparkline" viewBox="0 0 220 56" preserveAspectRatio="none">
-                  <path class="track" d="M0 48 L34 43 L68 39 L102 32 L136 27 L170 17 L220 10" />
-                  <path class="line" d="M0 48 L34 43 L68 39 L102 32 L136 27 L170 17 L220 10" />
-                </svg>
+
+              <div class="case-metrics" aria-label="Métricas del proyecto branding">
+                <div><strong>100%</strong><span>Coherencia de marca</span></div>
+                <div><strong>+190%</strong><span>Conversiones web</span></div>
+                <div><strong>+240%</strong><span>Percepción premium</span></div>
               </div>
-              <p>
-                Implementamos automatizaciones con IA para atención, inventario y analítica de ventas, escalando sin aumentar equipo.
+
+              <div class="case-mini-tags" aria-label="Categorías del proyecto branding">
+                <span>Branding</span>
+                <span>Posicionamiento</span>
+                <span>Conversión</span>
+              </div>
+
+              <p class="case-card-cta">Ver Caso de Éxito →</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div class="case-modal" id="case-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="case-modal-title">
+        <div class="case-modal-backdrop" data-case-close></div>
+        <article class="case-modal-panel">
+          <button class="case-modal-close" type="button" data-case-close aria-label="Cerrar caso de éxito">Cerrar ×</button>
+          <div class="case-modal-hero">
+            <p class="case-modal-id" id="case-modal-id">01</p>
+            <div>
+              <p class="case-modal-kicker" id="case-modal-kicker">CRM / Automatización</p>
+              <h3 id="case-modal-title">Caso de Éxito</h3>
+              <p id="case-modal-subtitle"></p>
+            </div>
+          </div>
+
+          <div class="case-modal-metrics" id="case-modal-metrics"></div>
+
+          <div class="case-modal-story">
+            <article>
+              <h4>Contexto</h4>
+              <p id="case-modal-context"></p>
+            </article>
+            <article>
+              <h4>Problema</h4>
+              <p id="case-modal-problem"></p>
+            </article>
+            <article>
+              <h4>Solución</h4>
+              <p id="case-modal-solution"></p>
+            </article>
+            <article>
+              <h4>Arquitectura</h4>
+              <p id="case-modal-architecture"></p>
+            </article>
+          </div>
+
+          <div class="case-modal-columns">
+            <div>
+              <h4>Stack tecnológico</h4>
+              <ul id="case-modal-stack"></ul>
+            </div>
+            <div>
+              <h4>Dashboards / Visuales</h4>
+              <ul id="case-modal-dashboards"></ul>
+            </div>
+            <div>
+              <h4>Before / After</h4>
+              <ul id="case-modal-beforeafter"></ul>
+            </div>
+            <div>
+              <h4>Resultados e impacto</h4>
+              <ul id="case-modal-impact"></ul>
+            </div>
+          </div>
+
+          <div class="case-modal-tags" id="case-modal-tags"></div>
+        </article>
+      </div>
+
+      <section id="equipo" class="section section-dark leadership" aria-label="Dirección estratégica">
+        <div class="container leadership-wrap">
+          <div class="section-head reveal leadership-head">
+            <div class="label center"><span></span><p>Dirección estratégica</p><span></span></div>
+            <h2>El equipo detrás de <em>CONSTALAB</em></h2>
+            <p>
+              Liderazgo estratégico, inteligencia operativa y visión tecnológica al servicio de la
+              transformación empresarial.
+            </p>
+          </div>
+
+          <div class="leadership-grid">
+            <article class="leader-card reveal">
+              <div class="leader-top">
+                <div class="leader-photo" aria-label="Espacio para foto de Gimena Baroni"><span>GB</span></div>
+                <div>
+                  <h3>Gimena Baroni</h3>
+                  <p class="leader-role">Co-Founder &amp; CEO</p>
+                </div>
+              </div>
+              <p class="leader-bio">
+                Lidera la visión estratégica y comercial de CONSTALAB, integrando identidad de marca,
+                comunicación y estructura digital para transformar negocios en ecosistemas más sólidos,
+                escalables y competitivos.
               </p>
-              <button type="button" class="magnetic">Ver caso completo ↗</button>
+              <p class="leader-area-title">Áreas de gestión</p>
+              <ul>
+                <li>Estrategia empresarial</li>
+                <li>Branding &amp; presencia digital</li>
+                <li>Comunicación estratégica</li>
+                <li>Expansión comercial</li>
+                <li>Desarrollo y optimización de campañas publicitarias</li>
+                <li>Gestión integral de marcas</li>
+                <li>Registro y protección de activos</li>
+              </ul>
+            </article>
+
+            <article class="leader-card reveal delay-1">
+              <div class="leader-top">
+                <div class="leader-photo" aria-label="Espacio para foto de Marcos Musella"><span>MM</span></div>
+                <div>
+                  <h3>Marcos Musella</h3>
+                  <p class="leader-role">Co-Founder &amp; CTO</p>
+                </div>
+              </div>
+              <p class="leader-bio">
+                Dirige el desarrollo tecnológico de CONSTALAB, creando sistemas inteligentes, automatizaciones
+                y soluciones digitales diseñadas para optimizar y escalar operaciones empresariales.
+              </p>
+              <p class="leader-area-title">Áreas de gestión</p>
+              <ul>
+                <li>Desarrollo de software a medida</li>
+                <li>Implementación de inteligencia artificial</li>
+                <li>Arquitectura de sistemas</li>
+                <li>Automatización inteligente</li>
+                <li>Desarrollo de modelos de IA personalizados</li>
+                <li>Diseño y desarrollo de plataformas web modernas</li>
+                <li>Soluciones digitales orientadas a resultados</li>
+              </ul>
             </article>
           </div>
         </div>
@@ -421,7 +603,7 @@
 
         <div>
           <h4>Navegación</h4>
-          <a href="#nosotros">Nosotros</a>
+          <a href="#nosotros">PILARES</a>
           <a href="#servicios">Servicios</a>
           <a href="#proceso">Proceso</a>
           <a href="#casos">Casos</a>

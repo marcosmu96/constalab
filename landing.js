@@ -27,7 +27,9 @@ const methodNodes = doc.querySelectorAll('.method-nodes li');
 const methodProgressLine = doc.querySelector('#method-progress-line');
 const methodCurrentLabel = doc.querySelector('#method-current-label');
 const countNodes = doc.querySelectorAll('[data-count]');
-const caseCards = doc.querySelectorAll('.case-card');
+const caseStudyCards = doc.querySelectorAll('.case-study-card');
+const caseModal = doc.querySelector('#case-modal');
+const caseModalCloseNodes = doc.querySelectorAll('[data-case-close]');
 const chapterSections = doc.querySelectorAll('.section');
 
 if (yearNode) {
@@ -38,7 +40,7 @@ window.addEventListener('load', () => {
   if (loadingScreen) {
     setTimeout(() => {
       loadingScreen.classList.add('hidden');
-    }, 620);
+    }, 1400);
   }
 });
 
@@ -85,7 +87,7 @@ if (menuToggle && mainNav) {
 }
 
 function setActiveNav() {
-  const sectionIds = ['nosotros', 'servicios', 'proceso', 'filosofia', 'casos', 'contacto'];
+  const sectionIds = ['nosotros', 'servicios', 'proceso', 'filosofia', 'casos', 'equipo', 'contacto'];
   let active = sectionIds[0];
 
   sectionIds.forEach((id) => {
@@ -120,13 +122,14 @@ function updateChapterEngine() {
     proceso: { id: '03', name: 'Método' },
     filosofia: { id: '04', name: 'Filosofía' },
     casos: { id: '05', name: 'Casos' },
-    contacto: { id: '06', name: 'Cierre' },
+    equipo: { id: '06', name: 'Equipo' },
+    contacto: { id: '07', name: 'Cierre' },
   };
 
   let activeKey = 'top';
   const pivot = window.innerHeight * 0.44;
 
-  ['nosotros', 'servicios', 'proceso', 'filosofia', 'casos', 'contacto'].forEach((id) => {
+  ['nosotros', 'servicios', 'proceso', 'filosofia', 'casos', 'equipo', 'contacto'].forEach((id) => {
     const section = doc.getElementById(id);
     if (!section) {
       return;
@@ -154,7 +157,7 @@ function updateChapterEngine() {
   }
   if (chapterFillNode) {
     const numeric = Number(chapter.id);
-    const progress = (numeric / 6) * 100;
+    const progress = (numeric / 7) * 100;
     chapterFillNode.style.height = `${progress}%`;
   }
 }
@@ -216,17 +219,17 @@ if ('IntersectionObserver' in window) {
   const caseObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('chart-visible');
-          animateCaseLine(entry.target);
-          observer.unobserve(entry.target);
+        if (!entry.isIntersecting) {
+          return;
         }
+        entry.target.classList.add('chart-visible');
+        observer.unobserve(entry.target);
       });
     },
     { threshold: 0.4 }
   );
 
-  caseCards.forEach((card) => caseObserver.observe(card));
+  caseStudyCards.forEach((card) => caseObserver.observe(card));
 
   const chapterObserver = new IntersectionObserver(
     (entries) => {
@@ -265,9 +268,8 @@ if ('IntersectionObserver' in window) {
 } else {
   revealNodes.forEach((node) => node.classList.add('visible'));
   countNodes.forEach((node) => animateCounter(node));
-  caseCards.forEach((card) => {
+  caseStudyCards.forEach((card) => {
     card.classList.add('chart-visible');
-    animateCaseLine(card);
   });
   chapterSections.forEach((section) => section.classList.add('in-view'));
   setMethodActive(0);
@@ -568,19 +570,231 @@ servicePanels.forEach((panel) => {
   });
 });
 
-function animateCaseLine(card) {
-  const line = card.querySelector('.sparkline .line');
-  if (!line) {
+const caseStudyData = {
+  crm: {
+    id: '01',
+    kicker: 'CRM / Automatizacion / Escalabilidad',
+    title: 'Del caos operativo al orden inteligente',
+    subtitle: 'Ecosistema CRM personalizado que centraliza catalogo, precios, filtros y administracion comercial en una sola operacion.',
+    context:
+      'Una startup en rapido crecimiento dedicada a la venta masiva de juegos para PlayStation necesitaba una estructura operativa capaz de organizar y administrar eficientemente todo su ecosistema digital.',
+    problem:
+      'La operacion estaba fragmentada entre procesos manuales y herramientas aisladas, lo que hacia lenta la gestion de productos, precios y decisiones comerciales.',
+    solution:
+      'CONSTALAB diseno y desarrollo un sistema CRM completo junto con una web optimizada y alineada a la misma logica operativa y visual del negocio.',
+    architecture:
+      'Arquitectura modular con catalogo centralizado, filtros avanzados, gestion de precios, paneles de analytics y flujos automatizados para administracion diaria.',
+    metrics: [
+      { value: '+280%', label: 'Velocidad operativa' },
+      { value: '5,000+', label: 'Productos gestionados' },
+      { value: '-70%', label: 'Tiempo de gestion' },
+    ],
+    stack: ['Frontend web optimizado', 'CRM personalizado', 'Panel administrativo', 'Automatizaciones operativas'],
+    dashboards: ['Analytics de catalogo y pricing', 'Panel de control comercial', 'Filtros inteligentes y segmentacion'],
+    beforeAfter: [
+      'Antes: procesos dispersos y alta friccion operativa',
+      'Despues: ecosistema unificado, trazable y escalable',
+    ],
+    impact: ['Mayor velocidad de ejecucion del equipo', 'Operacion comercial con menor error manual', 'Coherencia digital entre sistema y presencia web'],
+    tags: ['Sistema CRM personalizado', 'Catalogo centralizado', 'Filtros avanzados', 'Web optimizada', 'Ecosistema unificado'],
+  },
+  institutional: {
+    id: '02',
+    kicker: 'Institucional / Arquitectura documental / Inteligencia operativa',
+    title: 'Transformando complejidad institucional en sistema digital estructurado',
+    subtitle: 'Plataforma integral para gestionar perfiles, legajos y procesos internos de gran escala con dashboards inteligentes.',
+    context:
+      'Una institucion privada con matriculados necesitaba un sistema robusto y altamente organizado para gestionar documentacion, perfiles y procesos internos a gran escala.',
+    problem:
+      'La informacion critica se encontraba distribuida en formatos y canales no integrados, con baja trazabilidad y tiempos largos de busqueda y respuesta.',
+    solution:
+      'CONSTALAB desarrollo una plataforma de gestion integral con legajos digitales, filtros avanzados, notificaciones y paneles personalizados para cada rol.',
+    architecture:
+      'Estructura documental conectada, panel administrativo central, dashboard por usuario y perfiles compartibles con CV profesional y trazabilidad completa.',
+    metrics: [
+      { value: '10,000+', label: 'Documentos gestionados' },
+      { value: '+350%', label: 'Eficiencia operativa' },
+      { value: '-85%', label: 'Tiempo de busqueda' },
+    ],
+    stack: ['Plataforma de gestion integral', 'Panel administrativo', 'Sistema de notificaciones', 'Perfiles personalizados'],
+    dashboards: ['Dashboard de legajos', 'Vista de procesos por estado', 'Filtros avanzados por perfil'],
+    beforeAfter: ['Antes: operacion institucional compleja y fragmentada', 'Despues: ecosistema digital estructurado y trazable'],
+    impact: ['Escalabilidad documental real', 'Mayor inteligencia operativa', 'Reduccion radical del tiempo de consulta'],
+    tags: ['Plataforma de gestion integral', 'Dashboards inteligentes', 'Sistema de notificaciones', 'Panel administrativo', 'Perfiles personalizados'],
+  },
+  branding: {
+    id: '03',
+    kicker: 'Branding / Posicionamiento / Conversion',
+    title: 'Construyendo una identidad estrategica para crecer',
+    subtitle: 'Estrategia de marca, comunicacion y experiencia web orientada a conversion y percepcion premium.',
+    context:
+      'Dos empresarios especializados en gestion de importaciones necesitaban construir una presencia solida, estrategica y alineada con sus objetivos de crecimiento.',
+    problem:
+      'La marca no comunicaba el nivel real de expertise ni sostenia una narrativa consistente entre identidad, posicionamiento y conversion digital.',
+    solution:
+      'CONSTALAB desarrollo analisis estrategico, estrategia de comunicacion, identidad visual integral, logo, posicionamiento y web optimizada.',
+    architecture:
+      'Sistema de identidad y comunicacion con activos visuales consistentes, lineamientos de marca y experiencia digital disenada para resultados medibles.',
+    metrics: [
+      { value: '100%', label: 'Coherencia de marca' },
+      { value: '+190%', label: 'Conversiones web' },
+      { value: '+240%', label: 'Percepcion premium' },
+    ],
+    stack: ['Analisis estrategico', 'Identidad visual completa', 'Estrategia de comunicacion', 'Web orientada a conversion'],
+    dashboards: ['Snippets UI de alto impacto', 'Bloques de narrativa visual', 'Sistema de piezas de marca'],
+    beforeAfter: ['Antes: presencia sin cohesion estrategica', 'Despues: identidad premium alineada a objetivos comerciales'],
+    impact: ['Incremento de conversion y autoridad percibida', 'Sistema de marca coherente y escalable', 'Posicionamiento premium sostenible'],
+    tags: ['Analisis estrategico', 'Identidad visual completa', 'Estrategia de comunicacion', 'Posicionamiento premium', 'Web orientada a conversion'],
+  },
+};
+
+function renderCaseModalList(container, items) {
+  if (!container) {
+    return;
+  }
+  container.innerHTML = '';
+  items.forEach((item) => {
+    const li = doc.createElement('li');
+    li.textContent = item;
+    container.appendChild(li);
+  });
+}
+
+function openCaseModal(caseKey) {
+  if (!caseModal) {
     return;
   }
 
-  const length = line.getTotalLength();
-  line.style.strokeDasharray = `${length}`;
-  line.style.strokeDashoffset = `${length}`;
-  line.getBoundingClientRect();
-  line.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
-  line.style.strokeDashoffset = '0';
+  const data = caseStudyData[caseKey];
+  if (!data) {
+    return;
+  }
+
+  const idNode = doc.querySelector('#case-modal-id');
+  const kickerNode = doc.querySelector('#case-modal-kicker');
+  const titleNode = doc.querySelector('#case-modal-title');
+  const subtitleNode = doc.querySelector('#case-modal-subtitle');
+  const contextNode = doc.querySelector('#case-modal-context');
+  const problemNode = doc.querySelector('#case-modal-problem');
+  const solutionNode = doc.querySelector('#case-modal-solution');
+  const architectureNode = doc.querySelector('#case-modal-architecture');
+  const metricsNode = doc.querySelector('#case-modal-metrics');
+  const tagsNode = doc.querySelector('#case-modal-tags');
+
+  if (idNode) idNode.textContent = data.id;
+  if (kickerNode) kickerNode.textContent = data.kicker;
+  if (titleNode) titleNode.textContent = data.title;
+  if (subtitleNode) subtitleNode.textContent = data.subtitle;
+  if (contextNode) contextNode.textContent = data.context;
+  if (problemNode) problemNode.textContent = data.problem;
+  if (solutionNode) solutionNode.textContent = data.solution;
+  if (architectureNode) architectureNode.textContent = data.architecture;
+
+  if (metricsNode) {
+    metricsNode.innerHTML = '';
+    data.metrics.forEach((metric) => {
+      const item = doc.createElement('article');
+      item.innerHTML = `<strong>${metric.value}</strong><span>${metric.label}</span>`;
+      metricsNode.appendChild(item);
+    });
+  }
+
+  renderCaseModalList(doc.querySelector('#case-modal-stack'), data.stack);
+  renderCaseModalList(doc.querySelector('#case-modal-dashboards'), data.dashboards);
+  renderCaseModalList(doc.querySelector('#case-modal-beforeafter'), data.beforeAfter);
+  renderCaseModalList(doc.querySelector('#case-modal-impact'), data.impact);
+
+  if (tagsNode) {
+    tagsNode.innerHTML = '';
+    data.tags.forEach((tag) => {
+      const span = doc.createElement('span');
+      span.textContent = tag;
+      tagsNode.appendChild(span);
+    });
+  }
+
+  caseModal.classList.add('is-open');
+  caseModal.setAttribute('aria-hidden', 'false');
+  body.classList.add('case-modal-open');
 }
+
+function closeCaseModal() {
+  if (!caseModal) {
+    return;
+  }
+  caseModal.classList.remove('is-open');
+  caseModal.setAttribute('aria-hidden', 'true');
+  body.classList.remove('case-modal-open');
+}
+
+function initCaseStudyInteractions() {
+  caseStudyCards.forEach((card) => {
+    card.addEventListener('mousemove', (event) => {
+      if (window.matchMedia('(pointer: fine)').matches === false) {
+        return;
+      }
+
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const nx = (x / rect.width) * 100;
+      const ny = (y / rect.height) * 100;
+      const dx = x - rect.width / 2;
+      const dy = y - rect.height / 2;
+
+      card.style.setProperty('--case-mx', `${nx}%`);
+      card.style.setProperty('--case-my', `${ny}%`);
+      card.style.setProperty('--tilt-x', `${-(dy / rect.height) * 6}deg`);
+      card.style.setProperty('--tilt-y', `${(dx / rect.width) * 7}deg`);
+
+      const visual = card.querySelector('.case-visual');
+      if (visual) {
+        visual.style.transform = `translate3d(${dx * 0.01}px, ${dy * 0.01}px, 28px)`;
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--case-mx', '50%');
+      card.style.setProperty('--case-my', '50%');
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
+      const visual = card.querySelector('.case-visual');
+      if (visual) {
+        visual.style.transform = 'translate3d(0, 0, 28px)';
+      }
+    });
+
+    card.addEventListener('click', () => {
+      const caseKey = card.getAttribute('data-case');
+      if (caseKey) {
+        openCaseModal(caseKey);
+      }
+    });
+
+    card.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+      event.preventDefault();
+      const caseKey = card.getAttribute('data-case');
+      if (caseKey) {
+        openCaseModal(caseKey);
+      }
+    });
+  });
+
+  caseModalCloseNodes.forEach((node) => {
+    node.addEventListener('click', closeCaseModal);
+  });
+
+  doc.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && caseModal && caseModal.classList.contains('is-open')) {
+      closeCaseModal();
+    }
+  });
+}
+
+initCaseStudyInteractions();
 
 (function initHeroCanvas() {
   const canvas = doc.getElementById('hero-canvas');
