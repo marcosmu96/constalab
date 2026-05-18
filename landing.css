@@ -44,6 +44,16 @@ a {
   text-decoration: none;
 }
 
+::selection {
+  background: #c6a770;
+  color: #0a0a0a;
+}
+
+::-moz-selection {
+  background: #c6a770;
+  color: #0a0a0a;
+}
+
 h1,
 h2,
 h3,
@@ -1240,7 +1250,7 @@ h2 {
   min-height: 480px;
   display: flex;
   flex-direction: column;
-  gap: clamp(18px, 2vw, 28px);
+  gap: clamp(22px, 2.2vw, 32px);
   cursor: pointer;
   isolation: isolate;
   transform-style: preserve-3d;
@@ -1332,7 +1342,7 @@ h2 {
 .case-summary h3 {
   font-size: clamp(28px, 3.2vw, 54px);
   letter-spacing: -0.02em;
-  line-height: 1.03;
+  line-height: 1.1;
   color: #f6f2eb;
   margin-bottom: 8px;
   text-wrap: balance;
@@ -1345,6 +1355,7 @@ h2 {
 .case-summary p {
   font-size: 15px;
   color: #b9b2a5;
+  line-height: 1.65;
 }
 
 .case-visual {
@@ -1538,7 +1549,7 @@ h2 {
 .case-metrics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 18px 16px;
   position: relative;
   z-index: 2;
 }
@@ -1554,7 +1565,7 @@ h2 {
 .case-metrics strong {
   display: block;
   font-size: clamp(22px, 3vw, 46px);
-  line-height: 0.86;
+  line-height: 0.96;
   letter-spacing: -0.03em;
   color: #f0d39b;
   overflow-wrap: break-word;
@@ -1563,9 +1574,10 @@ h2 {
 
 .case-metrics span {
   display: block;
-  margin-top: 4px;
+  margin-top: 6px;
   color: #9f988b;
   font-size: 12px;
+  line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -2547,21 +2559,27 @@ body.case-modal-open {
   }
 
   .pillar-card {
-    padding: 11px 13px 9px;
-    border-radius: 12px;
+    padding: 18px 18px 16px;
+    border-radius: 16px;
+    min-height: 124px;
   }
 
   .pillar-card strong {
-    font-size: 13px;
-    margin-bottom: 4px;
+    font-size: 17px;
+    margin-bottom: 8px;
   }
 
   .pillar-card > span {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .pillar-num {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    font-size: 11px;
+  }
+
+  .pillar-list {
+    gap: 18px;
   }
 
   /* ── Servicios ── */
