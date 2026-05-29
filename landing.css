@@ -1098,6 +1098,25 @@ h2 {
 .service-lead p {
   margin-bottom: 0;
   max-width: 60ch;
+  text-align: justify;
+}
+
+/* Leyenda de partner tecnológico (Nubecenter). */
+.partner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #8b8680;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.partner-badge img {
+  height: 15px;
+  width: auto;
+  display: block;
+  opacity: 0.92;
 }
 
 /* ── Tarjetas categoría (Sistemas, Cloud) ── */
@@ -1196,6 +1215,23 @@ h2 {
   text-transform: uppercase;
 }
 
+/* Fila label + leyenda de partner (Hosting & Dominios): label izq, badge der. */
+.service-sub-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 26px 0 16px;
+  padding-top: 22px;
+  border-top: 1px solid #221d13;
+}
+
+.service-sub-head .service-sub-label {
+  margin: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
 /* ── Mini-cards de sistemas especializados ── */
 .service-mini-grid {
   display: grid;
@@ -1204,11 +1240,19 @@ h2 {
 }
 
 .service-mini {
+  display: flex;
+  flex-direction: column;
   border: 1px solid #1f1f1f;
   border-radius: 14px;
   padding: 20px;
   background: linear-gradient(160deg, #0d0d0d, #080808);
   transition: border-color 0.3s var(--spring), transform 0.3s var(--spring), box-shadow 0.3s var(--spring);
+}
+
+.service-mini .partner-badge {
+  margin-top: auto;
+  padding-top: 16px;
+  align-self: flex-end;
 }
 
 .service-mini:hover {
@@ -1235,6 +1279,7 @@ h2 {
   line-height: 1.5;
   color: #a4a097;
   margin-bottom: 0;
+  text-align: justify;
 }
 
 /* ── Sub-bloque Hosting & Dominios ── */
@@ -1249,6 +1294,7 @@ h2 {
   color: #a4a097;
   margin-bottom: 16px;
   max-width: 70ch;
+  text-align: justify;
 }
 
 .service-subblock-list {
