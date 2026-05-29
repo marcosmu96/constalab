@@ -17,11 +17,7 @@ const yearNode = doc.querySelector('#year');
 const cursorDot = doc.querySelector('.cursor-dot');
 const cursorRing = doc.querySelector('.cursor-ring');
 const magneticNodes = doc.querySelectorAll('.magnetic');
-const serviceTrack = doc.querySelector('.service-track');
 const servicePanels = doc.querySelectorAll('.service-panel');
-const servicePrev = doc.querySelector('#service-prev');
-const serviceNext = doc.querySelector('#service-next');
-const serviceCurrent = doc.querySelector('#service-current');
 const methodSteps = doc.querySelectorAll('.method-step');
 const methodNodes = doc.querySelectorAll('.method-nodes li');
 const methodProgressLine = doc.querySelector('#method-progress-line');
@@ -405,142 +401,51 @@ magneticNodes.forEach((node) => {
   });
 });
 
-let serviceActiveIndex = 0;
+// Categorías de servicios expandibles (Sistemas, Cloud & Hosting).
+const serviceCTAs = doc.querySelectorAll('.service-cta');
 
-function formatServiceIndex(index) {
-  return String(index + 1).padStart(2, '0');
-}
+serviceCTAs.forEach((cta) => {
+  const panel = cta.closest('.service-panel--category');
+  const region = doc.getElementById(cta.getAttribute('aria-controls'));
+  const textNode = cta.querySelector('.service-cta-text');
 
-function updateServiceControls(index) {
-  if (serviceCurrent) {
-    serviceCurrent.textContent = formatServiceIndex(index);
-  }
-  if (servicePrev) {
-    servicePrev.disabled = index <= 0;
-  }
-  if (serviceNext) {
-    serviceNext.disabled = index >= servicePanels.length - 1;
-  }
-}
-
-function scrollToService(index, behavior = 'smooth') {
-  if (!serviceTrack || servicePanels.length === 0) {
+  if (!panel || !region) {
     return;
   }
 
-  const nextIndex = Math.max(0, Math.min(index, servicePanels.length - 1));
-  serviceActiveIndex = nextIndex;
-  const target = servicePanels[nextIndex];
+  cta.addEventListener('click', () => {
+    const willOpen = !panel.classList.contains('is-open');
 
-  serviceTrack.scrollTo({
-    left: target.offsetLeft,
-    behavior,
-  });
+    if (willOpen) {
+      panel.classList.add('is-open');
+      // Animamos hasta la altura real del contenido y luego pasamos a 'auto'
+      // para que la región se adapte sola a reflows (cambio de columnas/resize).
+      region.style.height = `${region.scrollHeight}px`;
+      const onEnd = (event) => {
+        if (event.propertyName !== 'height') {
+          return;
+        }
+        region.style.height = 'auto';
+        region.removeEventListener('transitionend', onEnd);
+      };
+      region.addEventListener('transitionend', onEnd);
+    } else {
+      // De 'auto' a px concreto para poder animar el cierre.
+      region.style.height = `${region.scrollHeight}px`;
+      void region.offsetHeight; // fuerza reflow antes de colapsar
+      region.style.height = '0px';
+      panel.classList.remove('is-open');
+    }
 
-  servicePanels.forEach((panel, panelIndex) => {
-    panel.classList.toggle('is-active', panelIndex === nextIndex);
-  });
-
-  updateServiceControls(nextIndex);
-}
-
-function updateActiveServicePanel() {
-  if (!serviceTrack || servicePanels.length === 0 || window.innerWidth < 1200) {
-    updateServiceControls(0);
-    return;
-  }
-
-  const center = serviceTrack.scrollLeft + serviceTrack.clientWidth / 2;
-  let closestIndex = 0;
-  let minDist = Number.POSITIVE_INFINITY;
-
-  servicePanels.forEach((panel, index) => {
-    const panelCenter = panel.offsetLeft + panel.offsetWidth / 2;
-    const dist = Math.abs(panelCenter - center);
-    if (dist < minDist) {
-      minDist = dist;
-      closestIndex = index;
+    cta.setAttribute('aria-expanded', String(willOpen));
+    if (textNode) {
+      const label = willOpen ? cta.dataset.labelOpen : cta.dataset.labelClosed;
+      if (label) {
+        textNode.textContent = label;
+      }
     }
   });
-
-  serviceActiveIndex = closestIndex;
-  servicePanels.forEach((panel, index) => {
-    panel.classList.toggle('is-active', index === closestIndex);
-  });
-
-  updateServiceControls(closestIndex);
-}
-
-if (serviceTrack) {
-  let dragging = false;
-  let dragStartX = 0;
-  let dragStartScroll = 0;
-
-  serviceTrack.addEventListener('scroll', updateActiveServicePanel, { passive: true });
-  serviceTrack.addEventListener('keydown', (event) => {
-    if (window.innerWidth < 1200) {
-      return;
-    }
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      scrollToService(serviceActiveIndex + 1);
-    }
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      scrollToService(serviceActiveIndex - 1);
-    }
-  });
-
-  serviceTrack.addEventListener('pointerdown', (event) => {
-    if (window.innerWidth < 1200 || event.pointerType === 'touch') {
-      return;
-    }
-    dragging = true;
-    dragStartX = event.clientX;
-    dragStartScroll = serviceTrack.scrollLeft;
-    serviceTrack.classList.add('is-dragging');
-    serviceTrack.setPointerCapture(event.pointerId);
-  });
-
-  serviceTrack.addEventListener('pointermove', (event) => {
-    if (!dragging) {
-      return;
-    }
-    const delta = event.clientX - dragStartX;
-    serviceTrack.scrollLeft = dragStartScroll - delta;
-  });
-
-  function stopServiceDrag(event) {
-    if (!dragging) {
-      return;
-    }
-    dragging = false;
-    serviceTrack.classList.remove('is-dragging');
-    if (event && serviceTrack.hasPointerCapture(event.pointerId)) {
-      serviceTrack.releasePointerCapture(event.pointerId);
-    }
-    scrollToService(serviceActiveIndex);
-  }
-
-  serviceTrack.addEventListener('pointerup', stopServiceDrag);
-  serviceTrack.addEventListener('pointercancel', stopServiceDrag);
-  serviceTrack.addEventListener('pointerleave', stopServiceDrag);
-
-  if (servicePrev) {
-    servicePrev.addEventListener('click', () => {
-      scrollToService(serviceActiveIndex - 1);
-    });
-  }
-
-  if (serviceNext) {
-    serviceNext.addEventListener('click', () => {
-      scrollToService(serviceActiveIndex + 1);
-    });
-  }
-
-  window.addEventListener('resize', updateActiveServicePanel);
-  scrollToService(0, 'auto');
-}
+});
 
 servicePanels.forEach((panel) => {
   panel.addEventListener('mousemove', (event) => {
