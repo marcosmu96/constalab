@@ -3273,9 +3273,19 @@ body.case-modal-open {
     padding: 64px 0;
   }
 
-  /* WhatsApp flotante: sólo ícono en mobile para que no tape contenido. */
+  /* En mobile los botones largos (CTA) deben poder envolver en 2 líneas;
+     el nav-cta vive en el menú hamburguesa, así que el nowrap ya no aplica.
+     max-width evita que el inline-flex se estire al ancho del texto y desborde. */
+  .btn {
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  /* WhatsApp flotante: sólo ícono en mobile; lo subimos del borde inferior
+     (safe-area para no quedar pegado a la barra/indicador del teléfono). */
   .whatsapp-cta {
     padding: 7px;
+    bottom: calc(26px + env(safe-area-inset-bottom, 0px));
   }
 
   .whatsapp-cta__copy {
