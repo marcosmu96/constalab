@@ -847,6 +847,14 @@ h2 {
   letter-spacing: -0.01em;
 }
 
+.pillar-card em {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--gold-soft);
+}
+
 .pillar-card > span {
   color: var(--muted);
   font-size: 13px;
@@ -2886,6 +2894,14 @@ body.case-modal-open {
     justify-content: flex-start;
   }
 
+  /* Pilares: con los textos completos las 6 cards pueden superar 100vh en
+     pantallas bajas; dejamos crecer la sección para que no se recorte. */
+  .section.market {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
   /* La seccion leadership tiene padding propio, lo reseteamos */
   .section.leadership {
     padding-top: 0;
@@ -2928,25 +2944,30 @@ body.case-modal-open {
   .pillar-card {
     padding: 18px 18px 16px;
     border-radius: 16px;
-    min-height: 124px;
   }
 
   .pillar-card strong {
-    font-size: 17px;
-    margin-bottom: 8px;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .pillar-card em {
+    font-size: 12.5px;
+    margin-bottom: 7px;
   }
 
   .pillar-card > span {
-    font-size: 13px;
+    font-size: 12.5px;
+    line-height: 1.55;
   }
 
   .pillar-num {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-size: 11px;
   }
 
   .pillar-list {
-    gap: 18px;
+    gap: 14px;
   }
 
   /* ── Servicios ── */
