@@ -1,0 +1,16 @@
+# constalab.com · cabeceras de seguridad de la landing (Hostinger, LiteSpeed).
+#
+# OJO: este archivo vive en public_html, y de ahí cuelgan por symlink el CRM
+# (constalabgestion) y Etovital (etovital). Por eso las cabeceras se limitan a los
+# archivos de la landing: las de los otros sitios las pone cada aplicación.
+# La CSP va por <meta> en index.html: Hostinger reemplaza la cabecera por la suya.
+
+<IfModule mod_headers.c>
+    <FilesMatch "^(index\.html|landing\.(css|js))$">
+        Header always set Strict-Transport-Security "max-age=31536000"
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set X-Frame-Options "DENY"
+        Header always set Referrer-Policy "strict-origin-when-cross-origin"
+        Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    </FilesMatch>
+</IfModule>
